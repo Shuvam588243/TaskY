@@ -1,10 +1,24 @@
 
+//fetching the container where card will be added
 const taskContainer = document.querySelector('.task_container');
 const globalStore = [];
 
+const loadInitialCardData = () =>
+{
+  //Localstorage to access Card Data
+  const getCardData = localStorage.getItem("tasky");
+  //Convert to Normal Object
+  const {cards} = JSON.parse(getCardData);
+  //loop over the array of task objects to create HTML Cards, inject it in DOM
+  cards.map((card)=>
+  {
+    taskContainer.insertAdjacentHTML('beforeend', newCard);
+  });
+}
 
 const saveChanges = () =>
 {
+  //Fetching data from the modal
   const taskData = {
     id : `${Date.now()}`,
     imageUrl : document.getElementById('imgurl').value,
@@ -13,6 +27,7 @@ const saveChanges = () =>
     taskDescription : document.getElementById('description').value,
   }
   
+  //Making the New Cart
   const newCard = `
   <div class="col-sm-12 col-md-6 col-lg-4" id=${taskData.id}">
     <div class="card">
@@ -37,6 +52,7 @@ const saveChanges = () =>
 
   //Adding the Global Store array into the Local Storage
   localStorage.setItem("tasky",JSON.stringify({cards : globalStore}));
+
 
 
 
