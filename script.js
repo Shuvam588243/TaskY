@@ -18,7 +18,7 @@ const saveChanges = () =>
     <div class="card">
   <div class="card-header d-flex justify-content-end gap-2">
     <button type="button" class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
-    <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+    <button type="button" class="btn btn-outline-danger" onclick="taskDelete()"><i class="fas fa-trash-alt"></i></button>
   </div>
   <div class="card-body">
       <img src=${taskData.imageUrl} class="card-img-top" alt="event image">
@@ -41,3 +41,6 @@ const saveChanges = () =>
 
 
 };
+
+
+
