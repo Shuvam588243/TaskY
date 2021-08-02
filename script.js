@@ -1,6 +1,6 @@
 
 const taskContainer = document.querySelector('.task_container');
-console.log(taskContainer);
+const globalStore = [];
 
 
 const saveChanges = () =>
@@ -14,7 +14,7 @@ const saveChanges = () =>
   }
   
   const newCard = `
-  <div class="col-sm-12 col-md-6 col-lg-4 id=${taskData.id}">
+  <div class="col-sm-12 col-md-6 col-lg-4" id=${taskData.id}">
     <div class="card">
   <div class="card-header d-flex justify-content-end gap-2">
     <button type="button" class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
@@ -27,9 +27,17 @@ const saveChanges = () =>
     <a href="#" class="btn btn-primary px-4">Open</a>
   </div>
   </div>
-  `
+  `;
 
+  //Adding a new card ajdacent to the previous card
   taskContainer.insertAdjacentHTML('beforeend', newCard);
+
+  //Pusing the new task object into a global store array
+  globalStore.push(taskData);
+
+  //Adding the Global Store array into the Local Storage
+  localStorage.setItem("tasky",JSON.stringify({cards : globalStore}));
+
 
 
 
