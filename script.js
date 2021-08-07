@@ -12,7 +12,7 @@ const globalStore = [];
 
 
 const generateNewCard = (taskData) =>`<div class="col-sm-12 col-md-6 col-lg-4 h-100 mb-4" id=${taskData.id} style="height:200px">
-    <div class="card animated animate__headShake">
+    <div class="card animated animate__animated animate__headShake">
   <div class="card-header d-flex justify-content-end gap-2">
     <button type="button" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
     <button type="button" class="btn btn-outline-danger" onclick="taskDelete()"><i class="fas fa-trash-alt"></i></button>
@@ -21,7 +21,7 @@ const generateNewCard = (taskData) =>`<div class="col-sm-12 col-md-6 col-lg-4 h-
       <img src=${taskData.imageUrl} class="card-img-top" alt="event image">
     <h5 class="card-title fw-bolder text-primary mt-3">${taskData.taskTitle}</h5><span class="badge bg-secondary p-1">${taskData.taskType}</span>
     <p class="card-text">${taskData.taskDescription}</p>
-    <a href="#" class="btn btn-primary px-4">Open</a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#cardopen" class="btn btn-primary px-4">Open</a>
   </div>
   </div>
   `;
