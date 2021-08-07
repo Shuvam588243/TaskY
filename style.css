@@ -2,7 +2,7 @@ body{
   background-color: #ebf2ff;
 }
 .card:hover{
- box-shadow: 6px 10px 24px -6px rgba(0,0,0,0.8);
--webkit-box-shadow: 6px 10px 24px -6px rgba(0,0,0,0.8);
--moz-box-shadow: 6px 10px 24px -6px rgba(0,0,0,0.8);
+box-shadow: 6px 9px 15px -7px rgba(0,0,0,0.8);
+-webkit-box-shadow: 6px 9px 15px -7px rgba(0,0,0,0.8);
+-moz-box-shadow: 6px 9px 15px -7px rgba(0,0,0,0.8);
 }
