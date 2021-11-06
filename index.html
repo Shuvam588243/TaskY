@@ -4,37 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
       crossorigin="anonymous"
     />
-
-    <!-- fontawesome icons -->
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
-
-    <title>Task Management APP</title>
+    <title>Task Management</title>
   </head>
   <body style="background-color: #ebf3ff" onload="loadExistingCards()">
-    <!-- Modal -->
+    <!-- Add New Task Modal -->
     <div
       class="modal fade"
-      id="newTask"
+      id="mymodal"
       tabindex="-1"
-      aria-labelledby="newTaskLabel"
+      aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="newTaskLabel">Add Your Task Here</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Enter Your Task Here</h5>
             <button
               type="button"
               class="btn-close"
@@ -49,7 +46,8 @@
                 type="url"
                 class="form-control"
                 id="imageURL"
-                placeholder="http://image.com/image.jpg"
+                aria-describedby="image URL"
+                placeholder="https://image.com/image.jpg"
               />
             </div>
             <div class="mb-3">
@@ -58,6 +56,7 @@
                 type="text"
                 class="form-control"
                 id="taskTitle"
+                aria-describedby="Task Title"
                 placeholder="Web Development"
               />
             </div>
@@ -67,7 +66,8 @@
                 type="text"
                 class="form-control"
                 id="taskType"
-                placeholder="Practice"
+                aria-describedby="Task Type"
+                placeholder="Development"
               />
             </div>
             <div class="mb-3">
@@ -75,10 +75,11 @@
                 >Task Description</label
               >
               <textarea
-                id="taskDescription"
                 class="form-control"
+                name="Task Description"
+                id="taskDescription"
                 rows="3"
-                placeholder="Learn About Javascript"
+                placeholder="This is DOM Manupilation class"
               ></textarea>
             </div>
           </div>
@@ -93,8 +94,8 @@
             <button
               type="button"
               class="btn btn-primary"
-              onclick="addNewCard()"
               data-bs-dismiss="modal"
+              id="sav-changes"
             >
               Save changes
             </button>
@@ -102,49 +103,66 @@
         </div>
       </div>
     </div>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-        <div class="container-fluid">
-          <h6 class="fs-3 fw-bolder text-primary">Tasky</h6>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-3 me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-            </ul>
+    <!-- Add New Task Modal -->
+
+    <!-- Open Task Modal -->
+    <div class="modal fade" id="showTask" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body task-modal-body"></div>
+          <div class="modal-footer">
             <button
-              class="btn btn-primary"
               type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#newTask"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
             >
-              <i class="far fa-plus"></i> Add New
+              Close
             </button>
           </div>
         </div>
-      </nav>
-    </header>
-
+      </div>
+    </div>
+    <!-- Open Task Modal -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light shadow sticky-top"
+    >
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand text-primary fs-3 fw-bold">Task</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-target="#navbarcollapse"
+          data-bs-toggle="collapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarcollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a href="#" class="nav-link active">Home</a>
+            </li>
+          </ul>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            data-bs-toggle="modal"
+            data-bs-target="#mymodal"
+          >
+            <i class="far fa-plus"></i> Add New
+          </button>
+        </div>
+      </div>
+    </nav>
     <main class="container">
-      <section class="row justify-content-center mt-5">
+      <section class="row justify-content-center mt-3">
         <div class="col-md-8 col-lg-6">
           <div class="input-group mb-3 shadow">
             <input
               type="search"
+              id="searchBar"
               class="form-control"
-              placeholder="Search Task"
-              aria-label="Search Task"
+              placeholder="Search Your Task"
+              aria-label="Search Your Task"
               aria-describedby="basic-addon1"
             />
             <span class="input-group-text" id="basic-addon1">
@@ -153,30 +171,15 @@
           </div>
         </div>
       </section>
-
-      <!-- Task Container -->
-      <section class="task__container row"></section>
+      <section class="task-container row"></section>
     </main>
 
     <!-- JavaScript Bundle with Popper -->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
       crossorigin="anonymous"
     ></script>
-
     <script src="index.js"></script>
   </body>
 </html>
-
-
-<!-- <div class="card shadow-sm mb-3" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div> -->
